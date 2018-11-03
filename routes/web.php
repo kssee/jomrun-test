@@ -13,6 +13,8 @@
 
 Route::get('/', 'IndexController@home')->name('home');
 Route::get('favorite', 'IndexController@favorite')->name('favorite');
+Route::get('favorite/add/{id}', 'IndexController@addFavorite')->name('add_favorite');
+Route::get('favorite/remove/{id}', 'IndexController@removeFavorite')->name('remove_favorite');
 Route::get('logout', 'AuthController@logout')->name('logout');
 Route::match(['get','post'],'sign-up', 'AuthController@signup')->name('signup');
 Route::match(['get','post'],'log-in', 'AuthController@login')->name('login');

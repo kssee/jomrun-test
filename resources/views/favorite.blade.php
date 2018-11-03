@@ -2,28 +2,19 @@
 
 @section('content')
     @include('layouts.error-list')
-    @foreach($movies->chunk(3) as $group)
+    @foreach($movies->chunk(4) as $group)
         <div class="columns">
             @foreach($group as $movie)
                 <div class="column">
                     <div class="card">
-                        <div class="card-image">
-                            <figure class="image">
-                                @if(auth()->check())
-                                    @if($favorite_list && $favorite_list->has($movie->id))
-                                        <a class="fav-button-red" onclick="return confirm('Are you sure to remove this movie from your favorite list?')" href="{{route('remove_favorite',$movie->id)}}"><i class="fas fa-heart is-size-2"></i></a>
-                                    @else
-                                        <a class="fav-button" href="{{route('add_favorite',$movie->id)}}"><i class="far fa-heart is-size-2"></i></a>
-                                    @endif
-                                @else
-                                    <a class="fav-button" onclick="alert('You need login to add this movie to your favorite list.')"><i class="far fa-heart is-size-2"></i></a>
-                                @endif
-
-                                <img src="{{asset($movie->poster_path)}}" alt="{{$movie->title}}">
-                            </figure>
-                        </div>
                         <div class="card-content">
                             <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-48x48">
+                                        <img src="{{asset($movie->poster_path)}}" alt="Placeholder image">
+                                    </figure>
+                                    <br />
+                                </div>
                                 <div class="media-content">
                                     <p class="title is-5">{{$movie->title}}</p>
                                     <p class="subtitle is-6 has-text-grey">{{$movie->director}}</p>
@@ -46,6 +37,9 @@
                                 <span class="is-size-7 has-text-grey-light"><time datetime="2016-1-1">{{$movie->publish_at->toFormattedDateString()}}</time></span>
                             </div>
                         </div>
+                        <footer class="card-footer">
+                            <a onclick="return confirm('Are you sure to remove this movie from your favorite list?')" href="{{route('remove_favorite',['id'=>$movie->id,'back'=>'fav'])}}" class="card-footer-item">Remove from favorite</a>
+                        </footer>
                     </div>
                 </div>
             @endforeach

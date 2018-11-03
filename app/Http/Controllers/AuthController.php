@@ -26,6 +26,9 @@ class AuthController extends Controller
 
     public function signup(Request $request)
     {
+        if (auth()->check()) {
+            return redirect()->intended('/');
+        }
         if ($request->method() == 'POST') {
             $inputs = $request->validate(['name' => 'nullable', 'email' => 'required|email', 'password' => 'required']);
             $checkExisting = User::where('email', $inputs['email'])->first();
@@ -50,7 +53,10 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth()->logout();
+        if (auth()->check()) {
+            auth()->logout();
+        }
+
         return redirect()->route('home');
     }
 

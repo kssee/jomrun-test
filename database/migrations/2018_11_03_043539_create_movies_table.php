@@ -18,7 +18,7 @@ class CreateMoviesTable extends Migration
             $table->string('title');
             $table->string('director');
             $table->text('description')->nullable();
-            $table->string('banner_path')->nullable();
+            $table->string('poster_path')->nullable();
             $table->timestamp('publish_at');
             $table->unsignedTinyInteger('rating')->default(0);
             $table->unsignedInteger('comment_count')->default(0);

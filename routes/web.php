@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@home')->name('home');
+Route::get('favorite', 'IndexController@favorite')->name('favorite');
+Route::get('logout', 'AuthController@logout')->name('logout');
+Route::match(['get','post'],'sign-up', 'AuthController@signup')->name('signup');
+Route::match(['get','post'],'log-in', 'AuthController@login')->name('login');

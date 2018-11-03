@@ -14,7 +14,7 @@ class MovieTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         \Illuminate\Support\Facades\DB::statement("SET foreign_key_checks=0");
-        \App\Models\User::truncate();
+        \App\Models\Movie::truncate();
         \Illuminate\Support\Facades\DB::statement("SET foreign_key_checks=1");
 
         for ($i = 0; $i < 20; $i++) {
@@ -23,7 +23,7 @@ class MovieTableSeeder extends Seeder
                     'title' => ucfirst($faker->word) . ' ' . ucfirst($faker->word) . ' ' . ucfirst($faker->word) . ' ' . ucfirst($faker->word),
                     'director' => $faker->name,
                     'description' => $faker->text,
-                    'banner_path' => 'images/sample_movie_poster/' . rand(1,5) . '.png',
+                    'poster_path' => 'images/sample_movie_poster/' . rand(1,10) . '.png',
                     'publish_at' => \Carbon\Carbon::now()->subDays(rand(1,10)),
                     'rating' => rand(1,5),
                     'comment_count' => rand(1,100),

@@ -1,7 +1,6 @@
 @extends('layouts.default')
 
 @section('content')
-    <br />
     @foreach($movies->chunk(3) as $group)
         <div class="columns">
             @foreach($group as $movie)

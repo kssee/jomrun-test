@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
 
         \App\Models\User::create(
             [
-                'name' => 'Example Member',
+                'name' => 'Rex See',
                 'email' => 'member@example.com',
                 'password' => bcrypt('password'),
                 'email_verified_at' => \Carbon\Carbon::now()

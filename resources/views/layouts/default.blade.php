@@ -17,50 +17,48 @@
 </head>
 <body>
 
+<nav class="navbar is-expanded is-light is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{route('home')}}">
+            <img src="{{asset('images/jomrun-logo.png')}}" width="112" height="28">
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenubd-example">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navMenubd-example" class="navbar-menu">
+        <div class="navbar-start">
+            @if(auth()->check())
+                {{link_to_route('favorite','My Favorite ' ,[],['class'=>'navbar-item ' . (request()->route()->uri == 'favorite' ? 'is-active' : '')])}}
+            @endif
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                @if(auth()->check())
+                    <p class="is-size-7">Welcome back {{auth()->user()->name}} <i class="fas fa-smile-wink"></i></p> &nbsp;&nbsp;
+                    <div class="buttons">
+                        {{link_to_route('logout','Logout',[],['class'=>'button is-white'])}}
+                    </div>
+                @else
+                    <div class="buttons">
+                        {{link_to_route('signup','Sign up',[],['class'=>'button is-primary'])}}
+                        {{link_to_route('login','Log in',[],['class'=>'button is-white'])}}
+                    </div>
+                @endif
+
+            </div>
+        </div>
+    </div>
+</nav>
+<br /><br />
+
 <section class="section">
     <div class="container">
-        <nav class="navbar is-expanded" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-                </a>
-
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenubd-example">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-
-            <div id="navMenubd-example" class="navbar-menu">
-                <div class="navbar-start">
-                    {{link_to_route('home','Movies',[],['class'=>'navbar-item ' . (request()->route()->uri == '/' ? 'is-active' : '')])}}
-                    @if(auth()->check())
-                    {{link_to_route('favorite','Favorite ' ,[],['class'=>'navbar-item ' . (request()->route()->uri == 'favorite' ? 'is-active' : '')])}}
-                    @endif
-
-                </div>
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        @if(auth()->check())
-                            <div class="buttons">
-                                {{link_to_route('logout','Logout',[],['class'=>'button is-light'])}}
-                            </div>
-                        @else
-                            <div class="buttons">
-                                {{link_to_route('signup','Sign up',[],['class'=>'button is-primary'])}}
-                                {{link_to_route('login','Log in',[],['class'=>'button is-light'])}}
-                            </div>
-                        @endif
-
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        @include('layouts.error-list')
-
         @yield('content')
     </div>
 </section>

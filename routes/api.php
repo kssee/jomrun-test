@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'movie', 'as' => 'movie'], function () {
+    Route::match(['get','post'],'list', 'MovieController@movieList')->name('.list');
+    Route::match(['get','post'],'favorite', 'MovieController@favoriteList')->name('.favorite');
 });
